@@ -12,6 +12,18 @@
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.TokiSitelen"/>
+            android:theme="@style/Theme.TokiSitelen">
+
+        <!-- mi kepeken https://github.com/alanszlosek/android-keyboard -->
+        <service android:name="KamaJoSitelen"
+                 android:permission="android.permission.BIND_INPUT_METHOD" android:exported="false">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data android:name="android.view.im"
+                       android:resource="@xml/method" />
+        </service>
+    </application>
+
 
 </manifest>
