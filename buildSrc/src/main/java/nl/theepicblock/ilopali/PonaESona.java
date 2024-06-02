@@ -73,7 +73,7 @@ public abstract class PonaESona extends DefaultTask {
             }
         }
 
-        var lonKulupuNimi = getPokiPini().get().file("raw/kulupuNimiAle.csv").getAsFile().toPath();
+        var lonKulupuNimi = getPokiPini().get().file("raw/kulupu_nimi_ale.csv").getAsFile().toPath();
         Files.createDirectories(lonKulupuNimi.getParent());
         Files.writeString(lonKulupuNimi, KulupuNimi.paliELipu(nimiKulupu), StandardOpenOption.CREATE);
     }

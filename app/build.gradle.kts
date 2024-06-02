@@ -3,6 +3,28 @@ import nl.theepicblock.ilopali.PonaESona
 
 plugins {
     id("com.android.application")
+    id("org.barfuin.gradle.taskinfo") version "2.2.0"
+}
+
+val sonaLinku by tasks.register<KamaGit>("sonaLinku") {
+    pokiPini = layout.buildDirectory.file("lipu_pi_insa_ala/sona").get().asFile
+
+    lonKon = "https://github.com/lipu-linku/sona.git"
+    lonInsa = "2bc26bd8372c7199607a65b536bf67d1642c3a8b"
+}
+
+val ijoLinku by tasks.register<KamaGit>("ijoLinku") {
+    pokiPini = layout.buildDirectory.file("lipu_pi_insa_ala/ijo").get().asFile
+
+    lonKon = "https://github.com/lipu-linku/ijo.git"
+    lonInsa = "dd0208a20bd0b4817eba4115da0ef244bf2961a0"
+}
+
+val lipuNimi by tasks.register<PonaESona>("lipuNimi") {
+    pokiPini = layout.buildDirectory.get().file("lipu_pi_sin_pali/lipuNimi").asFile
+
+    pokiSona = sonaLinku.pokiPini
+    pokiIjo = ijoLinku.pokiPini
 }
 
 android {
@@ -31,35 +53,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-}
 
-val sonaLinku by tasks.register<KamaGit>("sonaLinku") {
-    pokiPini = layout.buildDirectory.file("lipu_pi_insa_ala/sona").get().asFile
-
-    lonKon = "https://github.com/lipu-linku/sona.git"
-    lonInsa = "2bc26bd8372c7199607a65b536bf67d1642c3a8b"
-}
-
-val ijoLinku by tasks.register<KamaGit>("ijoLinku") {
-    pokiPini = layout.buildDirectory.file("lipu_pi_insa_ala/ijo").get().asFile
-
-    lonKon = "https://github.com/lipu-linku/ijo.git"
-    lonInsa = "dd0208a20bd0b4817eba4115da0ef244bf2961a0"
-}
-
-tasks.register<PonaESona>("lipuNimi") {
-    pokiPini = layout.buildDirectory.get().file("lipu_pi_sin_pali/lipuNimi").asFile
-
-    pokiSona = sonaLinku.pokiPini
-    pokiIjo = ijoLinku.pokiPini
-}
-
-tasks.create("kulupuLipuNimi", Jar::class) {
-    from(tasks.getByName("lipuNimi").outputs)
+    applicationVariants.all {
+        registerGeneratedResFolders(tasks.getByName("lipuNimi").outputs.files)
+    }
 }
 
 dependencies {
-    implementation(tasks.getByName("kulupuLipuNimi").outputs.files)
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     testImplementation("junit:junit:4.13.2")
