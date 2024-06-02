@@ -65,13 +65,14 @@ public abstract class KamaGit extends DefaultTask {
     }
 
     /**
-     * ni ike · mi olin e ni
+     * ni ike · mi la pona e ni
      */
     private static class TokiPali extends EmptyProgressMonitor {
         private final ProgressLoggerFactory panaOpen;
         private ProgressLogger pana;
         private int paliTenpoPini;
         private int paliTenpoAle;
+        private boolean open;
 
         private TokiPali(ProgressLoggerFactory pana) {
             this.panaOpen = pana;
@@ -81,6 +82,7 @@ public abstract class KamaGit extends DefaultTask {
         public void beginTask(String nimiPali, int paliTenpoAle) {
             this.pana = panaOpen.newOperation(KamaGit.class);
             this.pana.setDescription(nimiPali);
+            this.pana.started();
             this.paliTenpoPini = 0;
             this.paliTenpoAle = paliTenpoAle;
         }
