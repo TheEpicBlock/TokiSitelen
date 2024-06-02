@@ -8,9 +8,7 @@ import org.eclipse.jgit.transport.URIish;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.OutputDirectory;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.*;
 import org.gradle.internal.logging.progress.ProgressLogger;
 import org.gradle.internal.logging.progress.ProgressLoggerFactory;
 
@@ -19,6 +17,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 
+@UntrackedTask(because = "ilo Git li ni")
 public abstract class KamaGit extends DefaultTask {
     /**
      * mi li pali lon poki pini
@@ -72,7 +71,6 @@ public abstract class KamaGit extends DefaultTask {
         private ProgressLogger pana;
         private int paliTenpoPini;
         private int paliTenpoAle;
-        private boolean open;
 
         private TokiPali(ProgressLoggerFactory pana) {
             this.panaOpen = pana;
