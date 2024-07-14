@@ -1,5 +1,7 @@
 package nl.theepicblock.ilopali.kepekenale;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 public final class Nimi {
@@ -18,6 +20,21 @@ public final class Nimi {
         this.sitelenJelo = sitelenJelo;
         this.sitelenSitelen = sitelenSitelen;
     }
+
+    public void lipuWeka(DataOutputStream pini) throws IOException {
+        lipuWeka(pini, nimiLipu);
+        lipuWeka(pini, nimiNimi);
+        lipuWeka(pini, nimiUwiko);
+        lipuWeka(pini, sitelenEmosi);
+        lipuWeka(pini, sitelenJelo);
+        lipuWeka(pini, sitelenSitelen);
+    }
+
+    public static void lipuWeka(DataOutputStream pini, String ijo) throws IOException {
+        pini.writeUTF(ijo == null ? "" : ijo);
+    }
+
+    ////
 
     public String nimiNimi() {
         return nimiNimi;

@@ -20,7 +20,7 @@ import nl.theepicblock.ilopali.kepekenale.Nimi;
 
 /**
  * ni li kepeken e sona Linku e ijo Linku
- * ni li lipu "csv" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg" · ni li lipu sama e "png" e lipu "jpg"
+ * ni li lipu "kulupu_nimi_ale.bin" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg" · ni li lipu sama e "png" e lipu "jpg"
  */
 @CacheableTask
 public abstract class PonaESona extends DefaultTask {
@@ -79,9 +79,9 @@ public abstract class PonaESona extends DefaultTask {
             }
         }
 
-        var lonKulupuNimi = getPokiPini().get().file("raw/kulupu_nimi_ale.csv").getAsFile().toPath();
-        Files.createDirectories(lonKulupuNimi.getParent());
-        Files.writeString(lonKulupuNimi, KulupuNimi.paliELipu(nimiKulupu), StandardOpenOption.CREATE);
+        var lonKulupuNimi = getPokiPini().get().file("raw/kulupu_nimi_ale.bin").getAsFile();
+        Files.createDirectories(lonKulupuNimi.toPath().getParent());
+        KulupuNimi.paliELipu(nimiKulupu, lonKulupuNimi);
     }
 
     private String ponaESitelenSitelen(String lonSitelenSitelen) throws IOException {
