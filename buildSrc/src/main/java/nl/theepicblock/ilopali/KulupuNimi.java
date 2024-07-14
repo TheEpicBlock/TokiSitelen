@@ -8,6 +8,7 @@ import java.util.List;
 public class KulupuNimi {
     public static void paliELipu(List<Nimi> nimiKepeken, File pini) throws IOException {
         var ponaKama = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(pini)));
+        ponaKama.writeInt(nimiKepeken.size());
         for (var nimi : nimiKepeken) {
             nimi.lipuWeka(ponaKama);
         }

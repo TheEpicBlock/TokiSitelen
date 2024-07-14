@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import nl.theepicblock.ilopali.kepekenale.Nimi;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class KulupuNimi {
@@ -15,18 +15,25 @@ public class KulupuNimi {
         this.kulupu = kulupu;
     }
 
-    public KulupuNimi kepekenLipuInsa(Context sonaSewi) {
+    public List<Nimi> nimi() {
+        return kulupu;
+    }
+
+    public static KulupuNimi kepekenLipuInsa(Context sonaSewi) {
         return kepekenLipu(sonaSewi, R.raw.kulupu_nimi_ale);
     }
 
-    private KulupuNimi kepekenLipu(Context sonaSewi, int lipu) {
+    private static KulupuNimi kepekenLipu(Context sonaSewi, int lipu) {
         Resources sitelenKulupu = sonaSewi.getResources();
-        try (InputStreamReader lipuLukin = new InputStreamReader(sitelenKulupu.openRawResource(lipu))) {
-
-
+        try (DataInputStream lipuLukin = new DataInputStream(new BufferedInputStream(sitelenKulupu.openRawResource(lipu)))) {
+            List<Nimi> kulupu = new ArrayList<>();
+            int nanpa = lipuLukin.readInt();
+            for (int i = 0; i < nanpa; i++) {
+                kulupu.add(Nimi.lipuInsa(lipuLukin));
+            }
+            return new KulupuNimi(kulupu);
         } catch (IOException e) {
             throw new RuntimeException("ale li pakala", e);
         }
-        return null;
     }
 }

@@ -1,5 +1,6 @@
 package nl.theepicblock.ilopali.kepekenale;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Objects;
@@ -30,8 +31,19 @@ public final class Nimi {
         lipuWeka(pini, sitelenSitelen);
     }
 
-    public static void lipuWeka(DataOutputStream pini, String ijo) throws IOException {
+    private static void lipuWeka(DataOutputStream pini, String ijo) throws IOException {
         pini.writeUTF(ijo == null ? "" : ijo);
+    }
+
+    public static Nimi lipuInsa(DataInputStream nasin) throws IOException {
+        return new Nimi(
+                nasin.readUTF(),
+                nasin.readUTF(),
+                nasin.readUTF(),
+                nasin.readUTF(),
+                nasin.readUTF(),
+                nasin.readUTF()
+        );
     }
 
     ////
