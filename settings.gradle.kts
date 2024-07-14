@@ -15,3 +15,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Toki Sitelen"
 include(":app")
+
+includeBuild("kepekenAle") {
+    dependencySubstitution {
+        substitute(module("nl.theepicblock:kepekenAle")).using(project(":"))
+    }
+}

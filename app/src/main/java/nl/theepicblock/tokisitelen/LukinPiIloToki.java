@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 public class LukinPiIloToki extends ViewGroup {
     KamaJoSitelen wileSitelen;
 
-    public LukinPiIloToki(Context context, AttributeSet attrs) {
-        super(context, attrs, 301410);
+    public LukinPiIloToki(Context sonaSewi, AttributeSet konMute) {
+        super(sonaSewi, konMute, 301410);
     }
 
     @Override

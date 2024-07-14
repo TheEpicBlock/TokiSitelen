@@ -3,7 +3,6 @@ import nl.theepicblock.ilopali.PonaESona
 
 plugins {
     id("com.android.application")
-    id("org.barfuin.gradle.taskinfo") version "2.2.0"
 }
 
 val sonaLinku by tasks.register<KamaGit>("sonaLinku") {
@@ -65,4 +64,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation("nl.theepicblock:kepekenAle")
 }

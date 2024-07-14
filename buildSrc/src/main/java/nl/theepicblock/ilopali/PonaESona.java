@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import nl.theepicblock.ilopali.kepekenale.Nimi;
+
 /**
  * ni li kepeken e sona Linku e ijo Linku
  * ni li lipu "csv" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg"

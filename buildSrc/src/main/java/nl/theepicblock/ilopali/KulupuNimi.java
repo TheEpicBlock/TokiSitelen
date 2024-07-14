@@ -1,6 +1,7 @@
 package nl.theepicblock.ilopali;
 
 import java.util.List;
+import nl.theepicblock.ilopali.kepekenale.Nimi;
 
 public class KulupuNimi {
     public static String paliELipu(List<Nimi> nimiKepeken) {
