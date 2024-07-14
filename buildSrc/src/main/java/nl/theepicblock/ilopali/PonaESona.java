@@ -1,8 +1,10 @@
 package nl.theepicblock.ilopali;
 
 import org.gradle.api.DefaultTask;
+import org.gradle.api.Project;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.*;
+import org.gradle.internal.FileUtils;
 import org.tomlj.Toml;
 import org.tomlj.TomlArray;
 
@@ -18,7 +20,7 @@ import nl.theepicblock.ilopali.kepekenale.Nimi;
 
 /**
  * ni li kepeken e sona Linku e ijo Linku
- * ni li lipu "csv" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg"
+ * ni li lipu "csv" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg" · ni li lipu sama e "png" e lipu "jpg"
  */
 @CacheableTask
 public abstract class PonaESona extends DefaultTask {
@@ -42,6 +44,7 @@ public abstract class PonaESona extends DefaultTask {
 
     @TaskAction
     public void pali() throws IOException {
+        IloNasa.moli(getPokiPini().get().getAsFile());
         var pokiOpen = getPokiSona().get().getAsFile().toPath();
         var pokiNimiMute = pokiOpen.resolve("words/metadata");
 
@@ -89,7 +92,7 @@ public abstract class PonaESona extends DefaultTask {
             throw new IllegalArgumentException("lon li ike");
         }
         var lonInsa = lonSitelenSitelen.substring(NIMI_PINI_PI_SITELEN_SITELEN.length());
-        var lonPini = "sitelen_sitelen/" + lonInsa.substring(lonInsa.lastIndexOf("/"));
+        var lonPini = "sitelen_sitelen_" + lonInsa.substring(lonInsa.lastIndexOf("/")+1);
 
         var pokiIjo = getPokiIjo().get().getAsFile().toPath();
         var pokiPini = getPokiPini().get().getAsFile().toPath();
