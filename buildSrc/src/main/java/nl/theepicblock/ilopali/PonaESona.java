@@ -1,22 +1,18 @@
 package nl.theepicblock.ilopali;
 
+import nl.theepicblock.ilopali.kepekenale.Nimi;
 import org.gradle.api.DefaultTask;
-import org.gradle.api.Project;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.tasks.*;
-import org.gradle.internal.FileUtils;
 import org.tomlj.Toml;
 import org.tomlj.TomlArray;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import nl.theepicblock.ilopali.kepekenale.Nimi;
 
 /**
  * ni li kepeken e sona Linku e ijo Linku
