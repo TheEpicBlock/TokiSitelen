@@ -12,7 +12,7 @@
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.TokiSitelen">
+            android:theme="@style/lukinKonSuli">
 
         <!-- mi kepeken https://github.com/alanszlosek/android-keyboard -->
         <service android:name="KamaJoSitelen"
