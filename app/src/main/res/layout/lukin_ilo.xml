@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        
-        android:id="@+id/keyboard"
-        android:layout_alignParentBottom="true"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_alignParentBottom="true"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:id="@+id/kamaNenaMute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
-        android:columnCount="10"
->
-</GridLayout>
+
+        android:columnCount="10">
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50sp">
+
+        <ImageButton
+            android:id="@+id/kamaAla"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/btn_plus">
+
+        </ImageButton>
+        <Button
+            android:id="@+id/kamaInsaNimi"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="·">
+
+        </Button>
+        <ImageButton
+            android:id="@+id/kamaAnte"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/btn_plus">
+
+        </ImageButton>
+    </LinearLayout>
+</LinearLayout>
