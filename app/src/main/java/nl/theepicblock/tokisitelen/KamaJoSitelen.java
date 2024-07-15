@@ -6,12 +6,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ViewAnimator;
 import nl.theepicblock.ilopali.kepekenale.Nimi;
 
 public class KamaJoSitelen extends InputMethodService {
     @Override
     public View onCreateInputView() {
-        View lukin = getLayoutInflater().inflate(R.layout.lukin_ilo, null);
+        ViewAnimator lukin = (ViewAnimator)getLayoutInflater().inflate(R.layout.lukin_ilo, null);
 
         ViewGroup kamaNena = lukin.findViewById(R.id.kamaNenaMute);
         KulupuNimi kulupuNimi = KulupuNimi.kepekenLipuInsa(this.getBaseContext());
@@ -39,8 +40,11 @@ public class KamaJoSitelen extends InputMethodService {
         lukin.findViewById(R.id.kamaInsaNimi).setOnClickListener(v -> {
             getCurrentInputConnection().commitText("·", 1);
         });
-        lukin.findViewById(R.id.kamaAnte).setOnClickListener(v -> {
-            System.out.println("EEEE");
+        lukin.findViewById(R.id.nenaAnte).setOnClickListener(v -> {
+            lukin.setDisplayedChild(1);
+        });
+        lukin.findViewById(R.id.nenaPiniAnte).setOnClickListener(v -> {
+            lukin.setDisplayedChild(0);
         });
         return lukin;
     }
