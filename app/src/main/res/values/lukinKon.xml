@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="lukinKonSuli" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="lukinKonSuli" parent="Theme.Material3.Light">
         <item name="android:textColor">@color/pimejaWawa</item>
     </style>
     <style name="nena">

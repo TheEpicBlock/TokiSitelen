@@ -5,7 +5,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.ViewAnimator;
 import nl.theepicblock.ilopali.kepekenale.Nimi;
 
@@ -46,6 +48,9 @@ public class KamaJoSitelen extends InputMethodService {
         lukin.findViewById(R.id.nenaPiniAnte).setOnClickListener(v -> {
             lukin.setDisplayedChild(0);
         });
+
+        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiNasinToki), NasinToki.values());
+        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiSitelenNena), SitelenNena.values());
         return lukin;
     }
 }

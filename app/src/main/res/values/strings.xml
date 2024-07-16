@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Toki Sitelen</string>
+    <string name="app_name">toki sitelen</string>
+    <string name="nasin_toki">nasin toki</string>
+    <string name="sitelen_nena">sitelen nena</string>
 </resources>

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
 
             android:columnCount="10">
-
+            <!-- nena li kama lon lon-->
         </GridLayout>
 
         <LinearLayout
@@ -29,9 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent"
-                android:src="@drawable/sitelen_kon_ala">
-
-            </ImageButton>
+                android:src="@drawable/sitelen_kon_ala" />
 
             <Button
                 style="@style/nenaWawa"
@@ -39,9 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent"
-                android:text="·">
-
-            </Button>
+                android:text="·" />
 
             <ImageButton
                 style="@style/nena"
@@ -49,9 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/sitelen_kon_ante">
-
-            </ImageButton>
+                android:src="@drawable/sitelen_kon_ante" />
         </LinearLayout>
     </LinearLayout>
 
@@ -60,14 +54,78 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        >
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="2" />
 
-        </Space>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"
+                android:text="@string/nasin_toki" />
+
+            <FrameLayout
+                style="@style/nena"
+                android:background="@drawable/monsi"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp">
+
+                <Spinner
+                    android:id="@+id/esunPiNasinToki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/sitelen_nena"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp" />
+
+            <FrameLayout
+                style="@style/nena"
+                android:background="@drawable/monsi"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp">
+
+                <Spinner
+                    android:id="@+id/esunPiSitelenNena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,9 +134,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_weight="4"
-                android:layout_height="match_parent">
-
-            </Space>
+                android:layout_height="match_parent" />
 
             <ImageButton
                 style="@style/nena"
@@ -86,9 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/sitelen_kon_ante">
-
-            </ImageButton>
+                android:src="@drawable/sitelen_kon_ante" />
         </LinearLayout>
     </LinearLayout>
 </ViewFlipper>
