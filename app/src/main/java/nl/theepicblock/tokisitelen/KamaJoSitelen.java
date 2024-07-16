@@ -1,5 +1,7 @@
 package nl.theepicblock.tokisitelen;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -16,18 +18,12 @@ public class KamaJoSitelen extends InputMethodService {
     public View onCreateInputView() {
         ViewAnimator lukin = (ViewAnimator)getLayoutInflater().inflate(R.layout.lukin_ilo, null);
 
-        ViewGroup kamaNena = lukin.findViewById(R.id.kamaNenaMute);
+        ViewGroup pokiNena = lukin.findViewById(R.id.kamaNenaMute);
         KulupuNimi kulupuNimi = KulupuNimi.kepekenLipuInsa(this.getBaseContext());
+        SharedPreferences wilePiJanKepeken =  getBaseContext()
+                .getSharedPreferences("wilePiJanKepeken", Context.MODE_PRIVATE);
 
-        for (Nimi nimi : kulupuNimi.nimi()) {
-            Button nena = (Button)getLayoutInflater().inflate(R.layout.nena, kamaNena, false);
-            nena.setText(nimi.sitelenEmosi());
-            nena.setOnClickListener(v -> {
-                getCurrentInputConnection().commitText(nimi.sitelenEmosi(), 1);
-            });
-            kamaNena.addView(nena);
-        }
-
+        oNena(kulupuNimi, pokiNena, wilePiJanKepeken);
 
         lukin.findViewById(R.id.kamaAla).setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -38,7 +34,6 @@ public class KamaJoSitelen extends InputMethodService {
             }
             return false;
         });
-
         lukin.findViewById(R.id.kamaInsaNimi).setOnClickListener(v -> {
             getCurrentInputConnection().commitText("·", 1);
         });
@@ -49,8 +44,66 @@ public class KamaJoSitelen extends InputMethodService {
             lukin.setDisplayedChild(0);
         });
 
-        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiNasinToki), NasinToki.values());
-        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiSitelenNena), SitelenNena.values());
+        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiNasinToki), NasinToki.values(), NasinToki.kepeken(wilePiJanKepeken), nasinToki -> {
+            wilePiJanKepeken.edit()
+                    .putString("nasin_toki", nasinToki.nimiKon())
+                    .apply();
+            oNena(kulupuNimi, pokiNena, wilePiJanKepeken);
+        });
+        IloEsun.ponaEEsun(this.getBaseContext(), lukin.findViewById(R.id.esunPiSitelenNena), SitelenNena.values(), SitelenNena.kepeken(wilePiJanKepeken), sitelenNena -> {
+            wilePiJanKepeken.edit()
+                    .putString("sitelen_nena", sitelenNena.nimiKon())
+                    .apply();
+            oNena(kulupuNimi, pokiNena, wilePiJanKepeken);
+        });
         return lukin;
+    }
+
+    private void oNena(KulupuNimi kulupuNimi, ViewGroup pokiNena, SharedPreferences wilePiJanKepeken) {
+        SitelenNena sitelenNena = SitelenNena.kepeken(wilePiJanKepeken);
+        NasinToki nasinToki = NasinToki.kepeken(wilePiJanKepeken);
+
+        System.out.println("jan li ante e wile");
+        System.out.println("sitelen nena: "+sitelenNena);
+        System.out.println("nasin toki: "+nasinToki);
+
+        pokiNena.removeAllViews();
+        for (Nimi nimi : kulupuNimi.nimi()) {
+            Button nena = (Button)getLayoutInflater().inflate(R.layout.nena, pokiNena, false);
+            switch (sitelenNena) {
+                case UWIKO:
+                    nena.setText(nimi.nimiUwiko());
+                    break;
+                case SITELEN_EMOSI:
+                    nena.setText(nimi.sitelenEmosi());
+                    break;
+                case SITELEN_JELO:
+                    nena.setText(nimi.sitelenJelo());
+                    break;
+            }
+
+            String nasinNimi;
+            switch (nasinToki) {
+                case SITELEN_EMOSI:
+                    nasinNimi = nimi.sitelenEmosi();
+                    break;
+                case SITELEN_JELO:
+                    nasinNimi = nimi.sitelenJelo();
+                    break;
+                case UWIKO:
+                    nasinNimi = nimi.nimiUwiko();
+                    break;
+                case LIPU:
+                    nasinNimi = nimi.nimiLipu();
+                    break;
+                default:
+                    nasinNimi = null;
+                    break;
+            }
+            nena.setOnClickListener(v -> {
+                getCurrentInputConnection().commitText(nasinNimi, 1);
+            });
+            pokiNena.addView(nena);
+        }
     }
 }
