@@ -1,7 +1,12 @@
 package nl.theepicblock.tokisitelen;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
+import nl.theepicblock.ilopali.kepekenale.Nimi;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -43,5 +48,32 @@ public enum SitelenNena {
 
     public String nimiKon() {
         return nimiKon;
+    }
+
+    public View oNemaENimi(Nimi nimi, Context kon, PaliIjoKepekenIjo<Integer, View> kamaLukin) {
+        if (this == SITELEN_SITELEN || this == SITELEN_PONA) {
+            ImageButton nena = (ImageButton)kamaLukin.pali(R.layout.nena_sitelen);
+            switch (this) {
+                case SITELEN_SITELEN:
+                    System.out.println("ee "+kon.getResources().getIdentifier(nimi.sitelenSitelen().replace(".jpg", ""), "drawable", kon.getPackageName())+ " wadw "+nimi.sitelenSitelen());
+                    nena.setImageResource(kon.getResources().getIdentifier(nimi.sitelenSitelen().replace(".jpg", ""), "drawable", kon.getPackageName()));
+                    break;
+            }
+            return nena;
+        } else {
+            Button nena = (Button)kamaLukin.pali(R.layout.nena);
+            switch (this) {
+                case UWIKO:
+                    nena.setText(nimi.nimiUwiko());
+                    break;
+                case SITELEN_EMOSI:
+                    nena.setText(nimi.sitelenEmosi());
+                    break;
+                case SITELEN_JELO:
+                    nena.setText(nimi.sitelenJelo());
+                    break;
+            }
+            return nena;
+        }
     }
 }

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static nl.theepicblock.ilopali.PonaESitelenSitelen.SITELEN_NASIN;
+
 /**
  * ni li kepeken e sona Linku e ijo Linku
  * ni li lipu "kulupu_nimi_ale.bin" kepeken lipu "toml" · ni li lipu "xml" kepeken lipu "svg" · ni li lipu sama e "png" e lipu "jpg"
@@ -88,18 +90,18 @@ public abstract class PonaESona extends DefaultTask {
             throw new IllegalArgumentException("lon li ike");
         }
         var lonInsa = lonSitelenSitelen.substring(NIMI_PINI_PI_SITELEN_SITELEN.length());
-        var lonPini = "sitelen_sitelen_" + lonInsa.substring(lonInsa.lastIndexOf("/")+1);
+        var lonPini = "sitelen_sitelen_" + lonInsa.substring(lonInsa.lastIndexOf("/")+1, lonInsa.lastIndexOf("."));
 
         var pokiIjo = getPokiIjo().get().getAsFile().toPath();
         var pokiPini = getPokiPini().get().getAsFile().toPath();
 
         var lipuOpen = pokiIjo.resolve(lonInsa);
-        var lipuPini = pokiPini.resolve("drawable").resolve(lonPini);
+        var lipuPini = pokiPini.resolve("drawable").resolve(lonPini+"."+SITELEN_NASIN);
 
         Files.createDirectories(lipuPini.getParent());
-        Files.copy(lipuOpen, lipuPini, StandardCopyOption.REPLACE_EXISTING);
+        PonaESitelenSitelen.pali(lipuOpen.toFile(), lipuPini.toFile());
 
-        return lonPini;
+        return "drawable/"+lonPini;
     }
 
     private String muteLiWan(TomlArray mute) {

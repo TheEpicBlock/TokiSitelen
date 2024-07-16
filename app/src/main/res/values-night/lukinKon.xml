@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="kuleNimi">@color/waloWawa</color>
+
     <style name="lukinKonSuli" parent="Theme.Material3.Dark">
-        <item name="android:textColor">@color/waloWawa</item>
+        <item name="android:textColor">@color/kuleNimi</item>
     </style>
     <style name="nena">
         <item name="android:backgroundTint">@color/pimejaLili</item>

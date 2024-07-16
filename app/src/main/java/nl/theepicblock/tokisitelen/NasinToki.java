@@ -2,6 +2,7 @@ package nl.theepicblock.tokisitelen;
 
 import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
+import nl.theepicblock.ilopali.kepekenale.Nimi;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -48,5 +49,20 @@ public enum NasinToki {
 
     public String nimiKon() {
         return nimiKon;
+    }
+
+    public String oPonaENimi(Nimi nimi) {
+        switch (this) {
+            case SITELEN_EMOSI:
+                return nimi.sitelenEmosi();
+            case SITELEN_JELO:
+                return nimi.sitelenJelo();
+            case UWIKO:
+                return nimi.nimiUwiko();
+            case LIPU:
+                return nimi.nimiLipu();
+            default:
+                throw new IllegalStateException("nasin li ike? "+this);
+        }
     }
 }

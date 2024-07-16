@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/nena"
+        android:layout_width="0dp"
+        android:layout_height="40sp"
+        android:layout_gravity="fill_horizontal"
+        android:layout_columnWeight="1"
+        android:gravity="center"
+
+        android:scaleType="centerInside"
+        android:padding="7dp"
+        android:tint="@color/kuleNimi"
+
+        tools:ignore="UseAppTint">
+</ImageButton>
