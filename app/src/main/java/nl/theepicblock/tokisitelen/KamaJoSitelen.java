@@ -33,7 +33,16 @@ public class KamaJoSitelen extends InputMethodService {
             return false;
         });
         lukin.findViewById(R.id.kamaInsaNimi).setOnClickListener(v -> {
-            getCurrentInputConnection().commitText("·", 1);
+            CharSequence poka = getCurrentInputConnection().getTextBeforeCursor(1, 0);
+            if (poka.length() != 0 && !Character.isWhitespace(poka.charAt(0))) {
+                getCurrentInputConnection().commitText(" · ", 1);
+            } else {
+                getCurrentInputConnection().commitText("·", 1);
+            }
+        });
+        lukin.findViewById(R.id.kamaInsaNimi).setOnLongClickListener(v -> {
+            getCurrentInputConnection().commitText("!", 1);
+            return true;
         });
         lukin.findViewById(R.id.nenaAnte).setOnClickListener(v -> {
             lukin.setDisplayedChild(1);
@@ -73,6 +82,13 @@ public class KamaJoSitelen extends InputMethodService {
 
             String nasinNimi = nasinToki.oPonaENimi(nimi);
             nena.setOnClickListener(v -> {
+                if (nasinToki == NasinToki.LIPU) {
+                    CharSequence poka = getCurrentInputConnection().getTextBeforeCursor(1, 0);
+                    if (poka.length() != 0 && !Character.isWhitespace(poka.charAt(0))) {
+                        getCurrentInputConnection().commitText(" "+nasinNimi, 1);
+                        return;
+                    }
+                }
                 getCurrentInputConnection().commitText(nasinNimi, 1);
             });
             pokiNena.addView(nena);
