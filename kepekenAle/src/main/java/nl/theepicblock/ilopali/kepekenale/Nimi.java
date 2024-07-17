@@ -12,14 +12,16 @@ public final class Nimi {
     private final String sitelenEmosi;
     private final String sitelenJelo;
     private final String sitelenSitelen;
+    private final String sitelenPona;
 
-    public Nimi(String nimiNimi, String nimiLipu, String nimiUwiko, String sitelenEmosi, String sitelenJelo, String sitelenSitelen) {
+    public Nimi(String nimiNimi, String nimiLipu, String nimiUwiko, String sitelenEmosi, String sitelenJelo, String sitelenSitelen, String sitelenPona) {
         this.nimiNimi = nimiNimi;
         this.nimiLipu = nimiLipu;
         this.nimiUwiko = nimiUwiko;
         this.sitelenEmosi = sitelenEmosi;
         this.sitelenJelo = sitelenJelo;
         this.sitelenSitelen = sitelenSitelen;
+        this.sitelenPona = sitelenPona;
     }
 
     public void lipuWeka(DataOutputStream pini) throws IOException {
@@ -29,6 +31,7 @@ public final class Nimi {
         lipuWeka(pini, sitelenEmosi);
         lipuWeka(pini, sitelenJelo);
         lipuWeka(pini, sitelenSitelen);
+        lipuWeka(pini, sitelenPona);
     }
 
     private static void lipuWeka(DataOutputStream pini, String ijo) throws IOException {
@@ -37,6 +40,7 @@ public final class Nimi {
 
     public static Nimi lipuInsa(DataInputStream nasin) throws IOException {
         return new Nimi(
+                nasin.readUTF(),
                 nasin.readUTF(),
                 nasin.readUTF(),
                 nasin.readUTF(),
@@ -72,6 +76,10 @@ public final class Nimi {
         return sitelenSitelen;
     }
 
+    public String sitelenPona() {
+        return sitelenPona;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
@@ -82,7 +90,8 @@ public final class Nimi {
                 Objects.equals(this.nimiUwiko, that.nimiUwiko) &&
                 Objects.equals(this.sitelenEmosi, that.sitelenEmosi) &&
                 Objects.equals(this.sitelenJelo, that.sitelenJelo) &&
-                Objects.equals(this.sitelenSitelen, that.sitelenSitelen);
+                Objects.equals(this.sitelenSitelen, that.sitelenSitelen)&&
+                Objects.equals(this.sitelenPona, that.sitelenPona);
     }
 
     @Override
@@ -98,7 +107,8 @@ public final class Nimi {
                 "nimiUwiko=" + nimiUwiko + ", " +
                 "sitelenEmosi=" + sitelenEmosi + ", " +
                 "sitelenJelo=" + sitelenJelo + ", " +
-                "sitelenSitelen=" + sitelenSitelen + ']';
+                "sitelenSitelen=" + sitelenSitelen + ", " +
+                "sitelenPona=" + sitelenPona + ']';
     }
 
 }

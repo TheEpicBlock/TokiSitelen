@@ -1,5 +1,6 @@
 package nl.theepicblock.ilopali;
 
+import com.android.ide.common.vectordrawable.Svg2Vector;
 import nl.theepicblock.ilopali.kepekenale.Nimi;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.DirectoryProperty;
@@ -7,9 +8,12 @@ import org.gradle.api.tasks.*;
 import org.tomlj.Toml;
 import org.tomlj.TomlArray;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +27,7 @@ import static nl.theepicblock.ilopali.PonaESitelenSitelen.SITELEN_NASIN;
 @CacheableTask
 public abstract class PonaESona extends DefaultTask {
     private final static String NIMI_PINI_PI_SITELEN_SITELEN = "https://raw.githubusercontent.com/lipu-linku/ijo/main/";
+    private final static String LON_PI_SITELEN_PONA = "sitelenpona/sitelen-seli-kiwen";
 
     /**
      * ni li poki e sona Linku
@@ -62,15 +67,16 @@ public abstract class PonaESona extends DefaultTask {
 
                     var nimiNimi = lipuNimiPona.getString("word");
 
-                    var nimiLipu = muteLiWan(lipuNimiPona.getArray("representations.ligatures"));
+                    var nimiLipu = muteOWan(lipuNimiPona.getArray("representations.ligatures"));
                     var lipuNimiUwiko = Objects.requireNonNull(lipuNimiPona.getString("representations.ucsur"));
                     var nimiUwiko = Character.toString(Integer.parseInt(lipuNimiUwiko.substring(2), 16));
                     var sitelenEmosi = Objects.requireNonNull(lipuNimiPona.getString("representations.sitelen_emosi"));
-                    var sitelenJelo = muteLiWan(lipuNimiPona.getArray("representations.sitelen_jelo"));
+                    var sitelenJelo = muteOWan(lipuNimiPona.getArray("representations.sitelen_jelo"));
 
                     var sitelenSitelen = ponaESitelenSitelen(lipuNimiPona.getString("representations.sitelen_sitelen"));
+                    var sitelenPona = ponaESitelenPona(nimiNimi);
 
-                    nimiKulupu.add(new Nimi(nimiNimi, nimiLipu, nimiUwiko, sitelenEmosi, sitelenJelo, sitelenSitelen));
+                    nimiKulupu.add(new Nimi(nimiNimi, nimiLipu, nimiUwiko, sitelenEmosi, sitelenJelo, sitelenSitelen, sitelenPona));
                 } catch (Exception ike) {
                     throw new RuntimeException("ike, lon insa nimi: "+lipuNimi, ike);
                 }
@@ -104,7 +110,25 @@ public abstract class PonaESona extends DefaultTask {
         return "drawable/"+lonPini;
     }
 
-    private String muteLiWan(TomlArray mute) {
+    private String ponaESitelenPona(String nimi) throws IOException {
+        var pokiIjo = getPokiIjo().get().getAsFile().toPath();
+        var lonSitelenPona = pokiIjo.resolve(LON_PI_SITELEN_PONA).resolve(nimi+".svg");
+        var nimiKama = "drawable/sitelen_pona_"+nimi;
+        var lonWile = getPokiPini().get().getAsFile().toPath().resolve(nimiKama+".xml");
+        var kama = new ByteArrayOutputStream();
+        var pakala = Svg2Vector.parseSvgToXml(lonSitelenPona, kama);
+        if (!pakala.isEmpty()) {
+            throw new RuntimeException(pakala);
+        }
+        Files.writeString(
+                lonWile,
+                kama.toString(StandardCharsets.UTF_8).replace("currentColor", "@color/kuleNimi"),
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE);
+        return nimiKama;
+    }
+
+    private String muteOWan(TomlArray mute) {
         Objects.requireNonNull(mute);
         if (mute.isEmpty()) {
             throw new IllegalArgumentException("mi ken ala wan · poki li poki e ala");

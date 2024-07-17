@@ -55,9 +55,11 @@ public enum SitelenNena {
             ImageButton nena = (ImageButton)kamaLukin.pali(R.layout.nena_sitelen);
             switch (this) {
                 case SITELEN_SITELEN:
-                    System.out.println("ee "+kon.getResources().getIdentifier(nimi.sitelenSitelen().replace(".jpg", ""), "drawable", kon.getPackageName())+ " wadw "+nimi.sitelenSitelen());
-                    nena.setImageResource(kon.getResources().getIdentifier(nimi.sitelenSitelen().replace(".jpg", ""), "drawable", kon.getPackageName()));
+                    nena.setImageResource(kon.getResources().getIdentifier(nimi.sitelenSitelen(), null, kon.getPackageName()));
                     break;
+                case SITELEN_PONA:
+                    nena.setImageResource(kon.getResources().getIdentifier(nimi.sitelenPona(), null, kon.getPackageName()));
+                    nena.setPadding(nena.getPaddingLeft(), nena.getPaddingTop(), nena.getPaddingRight(), 0);
             }
             return nena;
         } else {
