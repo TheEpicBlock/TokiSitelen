@@ -68,9 +68,9 @@ public abstract class PonaESona extends DefaultTask {
                     var nimiNimi = lipuNimiPona.getString("word");
 
                     var nimiLipu = muteOWan(lipuNimiPona.getArray("representations.ligatures"));
-                    var lipuNimiUwiko = Objects.requireNonNull(lipuNimiPona.getString("representations.ucsur"));
-                    var nimiUwiko = Character.toString(Integer.parseInt(lipuNimiUwiko.substring(2), 16));
-                    var sitelenEmosi = Objects.requireNonNull(lipuNimiPona.getString("representations.sitelen_emosi"));
+                    var lipuNimiUwiko = lipuNimiPona.getString("representations.ucsur");
+                    var nimiUwiko = lipuNimiUwiko == null ? null : Character.toString(Integer.parseInt(lipuNimiUwiko.substring(2), 16));
+                    var sitelenEmosi = lipuNimiPona.getString("representations.sitelen_emosi");
                     var sitelenJelo = muteOWan(lipuNimiPona.getArray("representations.sitelen_jelo"));
 
                     var sitelenSitelen = ponaESitelenSitelen(lipuNimiPona.getString("representations.sitelen_sitelen"));
@@ -116,6 +116,9 @@ public abstract class PonaESona extends DefaultTask {
         var nimiKama = "drawable/sitelen_pona_"+nimi;
         var lonWile = getPokiPini().get().getAsFile().toPath().resolve(nimiKama+".xml");
         var kama = new ByteArrayOutputStream();
+        if (!Files.exists(lonSitelenPona)) {
+            return null;
+        }
         var pakala = Svg2Vector.parseSvgToXml(lonSitelenPona, kama);
         if (!pakala.isEmpty()) {
             throw new RuntimeException(pakala);
